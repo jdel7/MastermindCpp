@@ -1,0 +1,151 @@
+#include "mastermind.h"
+#include <string>
+#include <algorithm>
+using namespace std;
+
+/*--------------------------------------------------------------
+CONSTRUCTOR
+PARAMETERS: A value parameter of type int called size
+POSTCONDITION: Sets the cols var equal to whatever is passed into
+the constructor, initializes moves to 0, and sets the first
+cols element to "red"
+--------------------------------------------------------------*/
+mastermind::mastermind(int size) : MAX_MOVES(10)
+{
+	// sets the cols var to equal the int passed in through the value parameter
+	cols = size;
+	moves = 0; // set moves equal to zero
+	pegs[0] = "red"; //set the first cols element of pegs to red
+
+	//cout << "size: " << cols << " moves: " << moves << " first element: " << pegs[0] << endl;
+	//cout << "max moves: " << MAX_MOVES << endl;
+}
+
+/*--------------------------------------------------------------
+CONSTRUCTOR
+PARAMETERS: An int variable and an array of type string
+POSTCONDITION: Sets the cols variable equal to size, initializes
+moves to 0, and takes the array passed in, lowercases the array,
+and assigns it to the array of type string called "pegs[i]"
+--------------------------------------------------------------*/
+mastermind::mastermind(int size, string initial[]): MAX_MOVES(10)
+{
+	// sets the cols var to equal the int passed in through the value parameter
+	cols = size;
+	moves = 0; // set moves equal to zero
+		// loop through the elements in array that was passed in
+		for (int i = 0; i < size; i++)
+		{
+			// lowercase each individual string in the array initial[i] using algorithm library
+			std::transform(initial[i].begin(), initial[i].end(), initial[i].begin(), ::tolower);
+			pegs[i] = initial[i]; // assign the lowercased string to pegs[i] array
+		}
+}
+
+/*--------------------------------------------------------------
+FUNCTION NAME: move
+PARAMETERS: An array of type string, and two ints
+POSTCONDITION: Takes in the player's moves, and checks: 1) whether
+the correct color is in the correct position incrementing the gold
+variable. 2) whether a correct color is in the incorrect position
+incrementing the silver variable
+--------------------------------------------------------------*/
+int mastermind::move(string playerMove[], int& gold, int& silver)
+{
+	gold = silver = 0; // set gold and silver equal to 0
+	int columns = getNumberOfColumns(); // get number of columns and set it to columns
+	bool correct[10]; // create an array of type bool called correct
+	bool attempt[10]; // create an array of type bool called attempt
+
+	for(int i = 0; i < 10; i++){
+		// loops through the correct and attempt array and initializes all
+		// values to false
+		correct[i] = false;
+		attempt[i] = false;
+	}
+
+	// for loop to loop through the array that was passed in
+	for(int j = 0; j < columns; j++)
+	{
+		// if user got the correct color in the correct spot
+		if(pegs[j] == playerMove[j])
+		{
+			// then increment the gold variable by 1
+			gold++;
+			// also, in the j position of both the correct[] and attempt[] array
+			// set the value to true (this will help with out next for loop)
+			correct[j] = attempt[j] = true;
+		}
+	}
+
+	// iterate through attempt[] array and the playerMove[] arrary
+	for(int k = 0; k < columns; k++)
+	{
+		// only continue if attempt[] at position k is false
+		if(!attempt[k])
+		{
+			// iterate through the correct[] array and through the pegs[] array
+			for (int l = 0; l < columns; l++)
+			{
+				// only continue if correct[] at position l is false
+				if(!correct[l])
+				{
+					// iterates first through the pegs array while playerMove[] stays
+					// at position k, and then once it is done iterating through the whole
+					// pegs[] array, only then increment k and then iterate through the
+					// whole pegs[] array again
+					// only continue if there is a correct color in the wrong place
+					if(playerMove[k] == pegs[l])
+					{
+						// iterate silver by 1
+						silver++;
+						// change the correct[] array at position l to true
+						correct[l] = true;
+					}
+				}
+			}
+		}
+	}
+
+	//increment the move counter
+	moves++;
+
+	// only continue if moves is equal to 10
+	if(moves == MAX_MOVES)
+	{
+		// ends the game
+		return -1;
+	}
+	// only continue if player has all correct colors in the correct order
+	else if(gold == columns)
+	{
+		// player has won the game
+		return 1;
+	}
+	else
+	{
+		// else, game is not over
+		return 0;
+	}
+
+}
+
+/*--------------------------------------------------------------
+FUNCTION NAME: getMoveIndex()
+PARAMETERS: no parameters
+POSTCONDITION: returns which move the player is on
+--------------------------------------------------------------*/
+int mastermind::getMoveIndex()
+{
+	return moves + 1;
+}
+
+/*--------------------------------------------------------------
+FUNCTION NAME: getNumberOfColumns()
+PARAMETERS: no parameters
+POSTCONDITION: returns the width of the board
+--------------------------------------------------------------*/
+int mastermind::getNumberOfColumns()
+{
+	return cols;
+}

@@ -16,9 +16,9 @@ int main()
 
   bool flag = false; // a boolean variable for our while loop
   // get the number of columns and set it to numCols
-  int numCols = myGame.getNumberOfColumns();
+  const int numCols = myGame.getNumberOfColumns();
   // an array of type string to hold the user's colors
-  string playerMoves[numCols];
+  string playerMoves[10];
 
   // a while loop that executes as long as flag is false
   while(!flag)

@@ -1,6 +1,9 @@
 #include "mastermind.h"
 #include <string>
 #include <algorithm>
+#include <cstdlib> 
+#include <ctime>
+
 using namespace std;
 
 /*--------------------------------------------------------------
@@ -12,13 +15,47 @@ cols element to "red"
 --------------------------------------------------------------*/
 mastermind::mastermind(int size) : MAX_MOVES(10)
 {
+  int randomNumber;
+  int low = 1; 
+  int high = 7;
+  int range = (high-low) + 1;
+
+  time_t seconds;
+  time(&seconds);
+  srand((unsigned int) seconds);
+
+  for (int i = 0; i < 5; i++)
+    {
+      randomNumber = rand() % (high-low + 1) + low;
+
+      switch(randomNumber)
+	{
+	case 1: pegs[i] = "red";
+	        break;
+	case 2: pegs[i] = "green";
+	        break;
+	case 3: pegs[i] = "blue";
+	        break;
+	case 4: pegs[i] = "yellow";
+	        break;
+	case 5: pegs[i] = "orange";
+	        break;
+	case 6: pegs[i] = "purple";
+	        break;
+	case 7: pegs[i] = "white";
+	        break;
+	default: pegs[i] = "red";
+	}
+    }
+  
+  
 	// sets the cols var to equal the int passed in through the value parameter
 	cols = size;
 	moves = 0; // set moves equal to zero
-	pegs[0] = "red"; //set the first cols element of pegs to red
+	//pegs[0] = "red"; //set the first cols element of pegs to red
 
-	//cout << "size: " << cols << " moves: " << moves << " first element: " << pegs[0] << endl;
-	//cout << "max moves: " << MAX_MOVES << endl;
+	
+
 }
 
 /*--------------------------------------------------------------

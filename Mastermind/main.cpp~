@@ -11,9 +11,8 @@ int main()
   string winningColors[] = {"green", "orange", "purple", "yellow"};
 
   // initializing our myGame object to start the game 
-  //  mastermind myGame(4, winningColors);
-  mastermind myGame(4);
-  
+  mastermind myGame(4, winningColors);
+
   // an array of type 'string' to hold the player's moves
   string play[4];
 

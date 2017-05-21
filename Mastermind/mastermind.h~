@@ -9,7 +9,7 @@ public:
 	int move(string[], int&, int&);
 	int getMoveIndex();
 	int getNumberOfColumns();
-	void board();
+	void board;
 private:
 	const int MAX_MOVES;
 	string pegs[10];

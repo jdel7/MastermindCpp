@@ -1,9 +1,9 @@
-#MastermindCpp
+# MastermindCpp
 A text based version of the classic boardgame Mastermind.
 
 If you're not familiar with the game you can read up on it [here!](https://en.wikipedia.org/wiki/Mastermind_(board_game) "Mastermind Info")
 
-##How to use it 
+## How to use it 
 All you need to run this game is some type of Unix shell and a c++ compiler
 
 1. Download the Mastermind directory/folder 

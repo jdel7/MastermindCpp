@@ -186,27 +186,3 @@ int mastermind::getNumberOfColumns()
 {
 	return cols;
 }
-
-/*--------------------------------------------------------------
-FUNCTION NAME: board()
-PARAMETERS: no parameters
-POSTCONDITION: returns the ascii version of the current board
----------------------------------------------------------------*/
-void mastermind::board()
-{
-  cout << left << setw(32) << setfill('*');
-  cout << setw(32) << "**********  Mastermind  " << endl;
-  cout << setw(32) << "**** 10 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 09 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 08 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 07 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 06 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 05 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 04 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 03 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 02 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "**** 01 | ( ) ( ) ( ) ( )" << endl;
-  cout << setw(32) << "*" << endl;
-
-  // basically you want that part in the center of the board to be an array. Specifically the array from the user 
-}
